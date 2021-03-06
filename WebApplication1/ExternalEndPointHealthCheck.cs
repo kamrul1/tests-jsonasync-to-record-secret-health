@@ -30,8 +30,13 @@ namespace WebApplication1
             logger.LogInformation($"Pinging: {hostName}");
 
             Ping ping = new();
-            var reply = await ping.SendPingAsync(hostName);
-            
+            //// actual verison - that really pings site
+            //var reply = await ping.SendPingAsync(hostName);
+
+            //// test version to cause error
+            var reply = await ping.SendPingAsync("notGoingToWork"+hostName);
+
+
             return reply.Status != IPStatus.Success ? 
                         HealthCheckResult.Healthy() : HealthCheckResult.Unhealthy();
         }
